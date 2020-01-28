@@ -44,6 +44,16 @@ listen {{ listen.name }}
   no option {{ option }}
 {% endfor %}
 
+{% if listen.no_log is not defined or listen.no_log != true %}
+{% for log in listen.log | default([]) %}
+  log {{ log.address }}{% if log.length is defined %} len {{log.length }}{% endif %} {{ log.facility }}{% if log.level is defined %} {{log.level }}{% endif %}{% if log.minlevel is defined %} {{ log.minlevel }}{% endif %}
+{% endfor %}
+{% endif %}
+
+{% if listen.logformat is defined %}
+  log-format {{ listen.logformat }}
+{% endif %}
+
 {% if listen.no_log | default(false) == true %}
   no log
 {% endif %}
