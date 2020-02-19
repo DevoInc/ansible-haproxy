@@ -71,8 +71,6 @@ frontend k8s-board
     mode tcp
     default_backend k8s-backend
     timeout client          1m
-    timeout connect        10s
-    timeout server          1m
 
 backend k8s-backend
     mode tcp
@@ -84,3 +82,5 @@ backend k8s-backend
   server {{ hostvars[workernode].inventory_hostname }} {{ hostvars[workernode].ansible_default_ipv4.address }}:31505 check
   {% endif %}
 {% endfor %}
+    timeout connect        10s
+    timeout server          1m
