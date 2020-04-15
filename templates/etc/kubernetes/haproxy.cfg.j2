@@ -58,8 +58,12 @@ backend k8s-api
   option tcp-check
   balance roundrobin
   default-server inter 10s downinter 5s rise 2 fall 2 slowstart 60s maxconn 250 maxqueue 256 weight 100
-{% for apinodes in groups['k8smasters'] %}
-  server {{ hostvars[apinodes].inventory_hostname }} {{ hostvars[apinodes].ansible_default_ipv4.address }}:6443 check
+
+# This is for Dinamic inventory
+{% for masternode in groups[stack_name] %}
+  {% if masternode in groups['master'] %}
+    server {{ hostvars[masternode].inventory_hostname }} {{ hostvars[masternode].ansible_default_ipv4.address }}:6443 check
+  {% endif %}
 {% endfor %}
 
 frontend k8s-board
@@ -71,8 +75,12 @@ frontend k8s-board
 backend k8s-backend
     mode tcp
     balance roundrobin
-{% for apinodes in groups['k8smasters'] %}
-  server {{ hostvars[apinodes].inventory_hostname }} {{ hostvars[apinodes].ansible_default_ipv4.address }}:31505 check
+
+# This is for Dinamic inventory
+{% for workernode in groups[stack_name] %}
+  {% if workernode in groups['worker'] %}
+  server {{ hostvars[workernode].inventory_hostname }} {{ hostvars[workernode].ansible_default_ipv4.address }}:31505 check
+  {% endif %}
 {% endfor %}
     timeout connect        10s
     timeout server          1m
