@@ -92,6 +92,12 @@ Set up (the latest version of) [HAProxy](http://www.haproxy.org/) in Ubuntu syst
 * `haproxy_listen.{n}.source`: [optional]: Set the source address or interface for connections from the proxy
 * `haproxy_listen.{n}.option`: [optional]: Options to set (e.g. `[dontlog-normal]`)
 * `haproxy_listen.{n}.no_option`: [optional]: Options to set (e.g. `[dontlog-normal]`)
+* `haproxy_listen.{n}.log`: [Same as defaults]: Log declarations
+* `haproxy_listen.{n}.log.address`: [required]: Indicates where to send the logs (e.g. `/dev/log`)
+* `haproxy_listen.{n}.log.facility`: [required]: Must be one of the 24 standard syslog facilities (e.g. `local0`, `local1`)
+* `haproxy_listen.{n}.log.level`: [optional]: Can be specified to filter outgoing messages (e.g. `notice`)
+* `haproxy_listen.{n}.log.minlevel`: [optional]: Can be specified to filter outgoing messages (e.g. `notice`)
+* `haproxy_listen.{n}.log.length`: [optional]: Can be specified to adjust message length in log (e.g. `2048`)
 * `haproxy_listen.{n}.no_log`: [optional, default `false`]: Used when the logger list must be flushed. For example, if you don't want to inherit from the default logger list
 * `haproxy_listen.{n}.tcp_check`: [optional]: Perform health checks using tcp-check send/expect sequences (e.g. `['expect string +OK\ POP3\ ready']`)
 * `haproxy_listen.{n}.http_check`: [optional]: Make HTTP health checks consider response contents or specific status codes (e.g. `expect status 403`)
@@ -199,6 +205,12 @@ Set up (the latest version of) [HAProxy](http://www.haproxy.org/) in Ubuntu syst
 * `haproxy_frontend.{n}.stick.{n}.table`: [required]: Configure the stickiness table for the current section (e.g. `type ip size 500k`)
 * `haproxy_frontend.{n}.option`: [optional]: Options to set (e.g. `[tcplog]`)
 * `haproxy_frontend.{n}.no_option`: [optional]: Options to unset (e.g. `[forceclose]`)
+* `haproxy_frontend.{n}.log`: [Same as defaults]: Log declarations
+* `haproxy_frontend.{n}.log.address`: [required]: Indicates where to send the logs (e.g. `/dev/log`)
+* `haproxy_frontend.{n}.log.facility`: [required]: Must be one of the 24 standard syslog facilities (e.g. `local0`, `local1`)
+* `haproxy_frontend.{n}.log.level`: [optional]: Can be specified to filter outgoing messages (e.g. `notice`)
+* `haproxy_frontend.{n}.log.minlevel`: [optional]: Can be specified to filter outgoing messages (e.g. `notice`)
+* `haproxy_frontend.{n}.log.length`: [optional]: Can be specified to adjust message length in log (e.g. `2048`)
 * `haproxy_frontend.{n}.no_log`: [optional, default `false`]: Used when the logger list must be flushed. For example, if you don't want to inherit from the default logger list
 * `haproxy_frontend.{n}.timeout`: [optional]: Timeout declarations
 * `haproxy_frontend.{n}.timeout.type`: [required]: The type (e.g. `client`)
