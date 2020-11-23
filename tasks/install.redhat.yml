@@ -4,6 +4,11 @@
     name: "centos-release-scl"
     state: present
   when: ansible_distribution == "CentOS"
+    
+- name: Enable repository
+  rhsm_repository:
+    name: "{{ haproxy_yum_redhat_repository }}"
+  when: ansible_distribution == "RedHat"
 
 - name: install dependencies
   yum:
