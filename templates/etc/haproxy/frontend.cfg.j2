@@ -31,6 +31,16 @@ frontend {{ frontend.name }}
   no option {{ option }}
 {% endfor %}
 
+{% if frontend.no_log is not defined or frontend.no_log != true  %}
+{% if frontend.log is string %}
+  log {{ frontend.log }}
+{% else %}
+{% for log in frontend.log | default([]) %}
+  log {{ log.address }}{% if log.length is defined %} len {{log.length }}{% endif %} {{ log.facility }}{% if log.level is defined %} {{log.level }}{% endif %}{% if log.minlevel is defined %} {{ log.minlevel }}{% endif %}
+{% endfor %}
+{% endif %}
+{% endif %}
+
 {% if frontend.logformat is defined %}
   log-format {{ frontend.logformat }}
 {% endif %}

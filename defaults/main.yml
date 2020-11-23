@@ -67,6 +67,9 @@ haproxy_userlists: []
 # ssl (file) map
 haproxy_ssl_map: []
 
+# user list
+haproxy_userlists: []
+
 # listen section
 haproxy_listen: []
 
