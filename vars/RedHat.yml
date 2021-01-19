@@ -8,8 +8,6 @@ haproxy_install:
     enablerepo: "{{ haproxy_yum_redhat_repository }}"
 
 haproxy_versions_supported:
-  - 1.6
-  - 1.7
   - 1.8
 
 haproxy_yum_redhat_repository: 'rhel-server-rhscl-7-rpms'
